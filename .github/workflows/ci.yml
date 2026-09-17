@@ -60,7 +60,7 @@ jobs:
             for attempt in 1 2 3; do
               if mvn -B --no-transfer-progress \
                 -f "${dependency_root}/${dependency}/pom.xml" \
-                -DskipTests -Djacoco.skip=true -Dgpg.skip=true install; then
+                -Dmaven.test.skip=true -Djacoco.skip=true -Dgpg.skip=true install; then
                 break
               fi
               if [[ "${attempt}" -eq 3 ]]; then
