@@ -46,14 +46,14 @@
             <!-- Dependency versions -->
             <commons-lang3.version>3.20.0</commons-lang3.version>
             <easy4j-spring-security-extension.version>2.0.x.20260630-SNAPSHOT</easy4j-spring-security-extension.version>
-            <jackson.version>2.17.2</jackson.version>
+            <jackson.version>2.18.9</jackson.version>
             <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
             <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <mockito.version>5.18.0</mockito.version>
             <lombok.version>1.18.46</lombok.version>
             <slf4j.version>2.0.18</slf4j.version>
-            <spring-framework.version>5.3.39</spring-framework.version>
-            <spring-security.version>5.6.0</spring-security.version>
+            <spring-framework.version>6.1.21</spring-framework.version>
+            <spring-security.version>6.2.8</spring-security.version>
             <!-- Maven Plugin versions -->
             <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
             <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
