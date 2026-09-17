@@ -6,6 +6,10 @@
 #
 # Runs `mvn -B clean verify` which includes the JaCoCo coverage gate
 # (90% line coverage, haltOnFailure=false) configured in the POM.
+#
+# The POM and the sibling Easy4J dependency repos use POM modelVersion 4.1.0,
+# which requires Maven 4; the runner's default mvn is Maven 3.x, so install
+# Maven 4 before building.
 name: CI
 
 on:
@@ -33,6 +37,13 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+
+      - name: Install Maven 4
+        run: |
+          curl -fsSL https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-4/binaries/apache-maven-4.0.0-rc-4-bin.tar.gz -o /tmp/apache-maven-4-bin.tar.gz
+          mkdir -p "$HOME/apache-maven-4"
+          tar -xzf /tmp/apache-maven-4-bin.tar.gz -C "$HOME/apache-maven-4" --strip-components=1
+          echo "$HOME/apache-maven-4/bin" >> "$GITHUB_PATH"
 
       - name: Install Easy4J snapshot dependencies
         env:
