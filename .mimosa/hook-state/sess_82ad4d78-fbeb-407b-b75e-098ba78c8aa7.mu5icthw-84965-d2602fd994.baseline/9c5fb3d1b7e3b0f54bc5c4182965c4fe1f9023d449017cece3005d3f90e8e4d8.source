@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.easy4j</groupId>
+    <artifactId>security-jwt-extension</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <url>https://github.com/easy-4-java/${project.artifactId}</url>
+    <version>2.0.x.20260630-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <description>JWT authentication and authorization utilities for Spring Security</description>
+
+    <!-- 开源协议采用 Apache 2.0 协议 -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <!-- 源码仓库（SCM）信息 -->
+    <scm>
+        <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
+        <url>https://github.com/easy-4-java/${project.artifactId}</url>
+        <tag>${project.artifactId}</tag>
+    </scm>
+
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <name>Loong Wan</name>
+            <email>hiwepy@gmail.com</email>
+            <url>https://github.com/loong10k</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <!-- 版本属性定义：Java 版本、依赖版本与 Maven 插件版本统一管理 -->
+    <properties>
+            <java.version>17</java.version>
+            <maven.compiler.release>${java.version}</maven.compiler.release>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <!-- Dependency versions -->
+            <commons-lang3.version>3.20.0</commons-lang3.version>
+            <easy4j-spring-security-extension.version>2.0.x.20260630-SNAPSHOT</easy4j-spring-security-extension.version>
+            <jackson.version>2.17.2</jackson.version>
+            <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
+            <junit-jupiter.version>6.1.0</junit-jupiter.version>
+            <lombok.version>1.18.46</lombok.version>
+            <slf4j.version>2.0.18</slf4j.version>
+            <spring-framework.version>5.3.39</spring-framework.version>
+            <spring-security.version>5.6.0</spring-security.version>
+            <!-- Maven Plugin versions -->
+            <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
+            <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+            <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+            <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+            <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+            <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+    </properties>
+
+    <!-- 依赖版本统一管理（dependencyManagement） -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- For Lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- For Slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- For Spring Security -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+            <!-- For Spring Framework -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-framework.version}</version>
+            </dependency>
+            <!-- For Spring Framework -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webflux</artifactId>
+                <version>${spring-framework.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- For Jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- For Commons Lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!-- For Servlet Api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax-servlet-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- Source: https://github.com/easy-4-java/spring-security-extension — easy4j spring-security-extension -->
+            <dependency>
+                <groupId>io.github.easy4j</groupId>
+                <artifactId>spring-security-extension</artifactId>
+                <version>${easy4j-spring-security-extension.version}</version>
+            </dependency>
+            <!-- For Spring Security -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 项目依赖（dependencies） -->
+    <dependencies>
+        <!-- For Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- For Slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- For Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <!-- For Spring Framework -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <!-- For Spring Framework -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- For Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!-- For Commons Lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <!-- For Servlet Api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Source: https://github.com/easy-4-java/spring-security-extension — easy4j spring-security-extension -->
+        <dependency>
+            <groupId>io.github.easy4j</groupId>
+            <artifactId>spring-security-extension</artifactId>
+        </dependency>
+        <!-- For Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- 构建配置（Build） -->
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+                <plugin>
+                    <!-- 编译插件：编译主代码至主输出目录 -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+
+            <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+            <plugin>
+                <!-- 覆盖率插件：生成覆盖率报告并校验测试覆盖率（目标 90%） -->
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${maven-jacoco-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <haltOnFailure>false</haltOnFailure>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+            <plugin>
+                <!-- 编译插件：编译主代码至主输出目录 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <!-- 源代码编译版本 -->
+                    <source>${java.version}</source>
+                    <!-- 目标平台编译版本 -->
+                    <target>${java.version}</target>
+                    <!-- 保留方法参数名，支持 Spring MVC 按参数名绑定 -->
+                    <parameters>true</parameters>
+                    <!-- 字符集编码 -->
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <!-- 编译最大内存 -->
+                    <maxmem>512M</maxmem>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+            <plugin>
+                <!-- 文档插件：发布时自动生成 Javadoc 并发布 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <failOnError>false</failOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
+            <plugin>
+                <!-- 源码插件：发布时自动将源码同时发布 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 制品发布仓库配置（distributionManagement） -->
+    <distributionManagement>
+        <repository>
+            <id>2624322-release-6F6h6R</id>
+            <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-release-6f6h6r</url>
+        </repository>
+        <snapshotRepository>
+            <id>2624322-snapshot-3EoOv3</id>
+            <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-snapshot-3eoov3</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- 构建 Profile 配置 -->
+    <profiles>
+        <!-- 发布到 Maven Central Portal：mvn -Pcentral deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
+
+        <profile>
+            <id>central</id>
+            <build>
+                <plugins>
+
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+                    <plugin>
+                        <!-- 签名插件：对制品进行 PGP 签名 -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
+                    <plugin>
+                        <!-- 发布插件：将制品发布到 Maven Central Portal -->
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${maven-central-publishing-plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

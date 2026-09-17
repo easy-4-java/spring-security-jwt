@@ -1,0 +1,5 @@
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/test/java/org/springframework/security/boot/jwt/authentication/JwtAuthenticationTokenTest.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/test/java/org/springframework/security/boot/jwt/authentication/JwtAuthorizationSuccessHandlerTest.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/test/java/org/springframework/security/boot/jwt/authentication/JwtAuthorizationTokenTest.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/test/java/org/springframework/security/boot/jwt/authentication/server/JwtAuthenticationWebFilterTest.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/test/java/org/springframework/security/boot/jwt/endpoint/RefreshTokenEndpointTest.java

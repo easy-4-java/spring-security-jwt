@@ -1,0 +1,5 @@
+org/springframework/security/boot/jwt/endpoint/RefreshTokenEndpointTest.class
+org/springframework/security/boot/jwt/authentication/server/JwtAuthenticationWebFilterTest.class
+org/springframework/security/boot/jwt/authentication/JwtAuthenticationTokenTest.class
+org/springframework/security/boot/jwt/authentication/JwtAuthorizationTokenTest.class
+org/springframework/security/boot/jwt/authentication/JwtAuthorizationSuccessHandlerTest.class

@@ -1,5 +1,5 @@
-/Users/wandl/workspaces/workspace-github-easy-4-java/security-jwt-extension/src/main/java/org/springframework/security/boot/JwtAuthenticationWebFilter.java
-/Users/wandl/workspaces/workspace-github-easy-4-java/security-jwt-extension/src/main/java/org/springframework/security/boot/RefreshTokenEndpoint.java
-/Users/wandl/workspaces/workspace-github-easy-4-java/security-jwt-extension/src/main/java/org/springframework/security/boot/JwtAuthorizationSuccessHandler.java
-/Users/wandl/workspaces/workspace-github-easy-4-java/security-jwt-extension/src/main/java/org/springframework/security/boot/JwtAuthorizationToken.java
-/Users/wandl/workspaces/workspace-github-easy-4-java/security-jwt-extension/src/main/java/org/springframework/security/boot/JwtAuthenticationToken.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/main/java/org/springframework/security/boot/jwt/authentication/JwtAuthenticationToken.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/main/java/org/springframework/security/boot/jwt/authentication/JwtAuthorizationSuccessHandler.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/main/java/org/springframework/security/boot/jwt/authentication/JwtAuthorizationToken.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/main/java/org/springframework/security/boot/jwt/authentication/server/JwtAuthenticationWebFilter.java
+/Users/wandl/workspaces/workspace-github-easy-4-java/spring-security-jwt/src/main/java/org/springframework/security/boot/jwt/endpoint/RefreshTokenEndpoint.java
