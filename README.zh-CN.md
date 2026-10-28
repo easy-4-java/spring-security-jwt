@@ -56,9 +56,9 @@
 | 项目 | 版本 |
 | :--- | :--- |
 | JDK | 8+ |
-| Maven | 3.0+（内置 Maven Wrapper 3.5.0） |
-| Spring Security | 5.6.0（`spring-security-core`、`spring-security-web`） |
-| Spring Framework | 5.3.39（`spring-web`、`spring-webflux`） |
+| Maven | 3.9.16（内置 Maven Wrapper） |
+| Spring Security | 5.7.11（`spring-security-core`、`spring-security-web`） |
+| Spring Framework | 5.3.31（`spring-web`、`spring-webflux`） |
 | Jackson | 2.17.2（`jackson-databind`） |
 | easy4j 依赖 | `io.github.easy4j:spring-security-extension` |
 
