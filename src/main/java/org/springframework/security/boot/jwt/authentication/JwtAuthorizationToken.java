@@ -92,7 +92,7 @@ public class JwtAuthorizationToken extends AbstractAuthenticationToken {
      *                    principal's identity, never {@code null}.
      */
     public JwtAuthorizationToken( Object principal, Object credentials) {
-        super(null);
+        super((Collection<? extends GrantedAuthority>) null);
         this.principal = principal;
         this.credentials = credentials;
         this.setAuthenticated(false);

@@ -47,13 +47,13 @@
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <easy4j-spring-security-extension.version>3.0.x.20260630-SNAPSHOT</easy4j-spring-security-extension.version>
         <jackson-bom.version>3.2.1</jackson-bom.version>
-        <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
+        <jakarta-servlet-api.version>6.1.0</jakarta-servlet-api.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <lombok.version>1.18.46</lombok.version>
         <mockito.version>5.20.0</mockito.version>
         <slf4j.version>2.0.18</slf4j.version>
-        <spring-framework.version>5.3.39</spring-framework.version>
-        <spring-security.version>5.6.0</spring-security.version>
+        <spring-framework.version>7.0.2</spring-framework.version>
+        <spring-security.version>7.0.2</spring-security.version>
         <!-- Maven Plugin versions -->
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
@@ -65,6 +65,20 @@
     <!-- 依赖版本统一管理（dependencyManagement） -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>${spring-security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- For Lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -113,9 +127,9 @@
             </dependency>
             <!-- For Servlet Api -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${javax-servlet-api.version}</version>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta-servlet-api.version}</version>
                 <scope>provided</scope>
             </dependency>
             <!-- Source: https://github.com/easy-4-java/spring-security-extension — easy4j spring-security-extension -->
@@ -193,8 +207,8 @@
         </dependency>
         <!-- For Servlet Api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- Source: https://github.com/easy-4-java/spring-security-extension — easy4j spring-security-extension -->

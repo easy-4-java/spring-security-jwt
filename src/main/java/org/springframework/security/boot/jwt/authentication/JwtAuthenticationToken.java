@@ -103,7 +103,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 	 *                    usually a JWT bearer string, never {@code null}.
 	 */
 	public JwtAuthenticationToken(Object principal, Object credentials) {
-		super(null);
+		super((Collection<? extends GrantedAuthority>) null);
 		this.principal = principal;
 		this.credentials = credentials;
 		setAuthenticated(false);

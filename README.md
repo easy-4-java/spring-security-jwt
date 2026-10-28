@@ -49,17 +49,18 @@ JWT authentication and authorization utilities for Spring Security. This module 
 | `JwtAuthorizationSuccessHandler` | Available | Servlet `AuthenticationSuccessHandler` for authorization success responses. |
 | `RefreshTokenEndpoint` | WIP | `@RestController` placeholder; no endpoints implemented yet. |
 
-> Status is reported as of `3.0.x.x.20260630-SNAPSHOT` on the `feature/3.0.x` branch.
+> Status is reported as of `3.0.x.20260630-SNAPSHOT` on the `feature/3.0.x` branch.
 
 ## 3. Requirements & Compatibility
 
 | Item | Version |
 | :--- | :--- |
 | JDK | 21+ |
-| Maven | 3.0+ (Maven Wrapper 3.5.0 bundled) |
-| Spring Security | 5.6.0 (`spring-security-core`, `spring-security-web`) |
-| Spring Framework | 5.3.39 (`spring-web`, `spring-webflux`) |
-| Jackson | 2.17.2 (`jackson-databind`) |
+| Maven | 4.0.0-rc-5 (bundled Wrapper) |
+| Spring Security | 7.0.2 (`spring-security-core`, `spring-security-web`) |
+| Spring Framework | 7.0.2 (`spring-web`, `spring-webflux`) |
+| Servlet API | Jakarta Servlet 6.1.0 (provided) |
+| Jackson | 3.2.1 (`jackson-databind`) |
 | easy4j dependency | `io.github.easy4j:spring-security-extension` |
 
 **Version lines**
