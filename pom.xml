@@ -46,7 +46,7 @@
             <!-- Dependency versions -->
             <commons-lang3.version>3.20.0</commons-lang3.version>
             <easy4j-spring-security-extension.version>2.0.x.20260630-SNAPSHOT</easy4j-spring-security-extension.version>
-            <jackson.version>2.17.2</jackson.version>
+            <jackson.version>2.18.12</jackson.version>
             <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
             <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <mockito.version>5.18.0</mockito.version>
@@ -98,11 +98,13 @@
                 <version>${spring-framework.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- For Jackson -->
+            <!-- Align all Jackson 2.x components, including transitive JWT codecs. -->
             <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <!-- For Commons Lang3 -->
             <dependency>
@@ -222,6 +224,14 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version>
+                <configuration>
+                    <failIfNoTests>true</failIfNoTests>
+                </configuration>
+            </plugin>
 
             <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
             <plugin>
