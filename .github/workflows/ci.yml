@@ -31,6 +31,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v7
 
+      - name: Remove checkout build artifacts on runner
+        run: python3 .github/scripts/run_verify.py --clean-only
+
+      - name: Test report provenance helper
+        run: python3 .github/scripts/test_run_verify.py
+
       - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
@@ -45,46 +51,43 @@ jobs:
           tar -xzf /tmp/apache-maven-4-bin.tar.gz -C "$HOME/apache-maven-4" --strip-components=1
           echo "$HOME/apache-maven-4/bin" >> "$GITHUB_PATH"
 
-      - name: Install Easy4J snapshot dependencies
-        env:
-          EASY4J_BRANCH: ${{ github.base_ref || github.ref_name }}
-          EASY4J_DEPENDENCIES: "jwt-issuer spring-security-extension"
+      - name: Build pinned public Easy4J snapshot sources
         run: |
           set -euo pipefail
           dependency_root="${RUNNER_TEMP}/easy4j-dependencies"
           mkdir -p "${dependency_root}"
-          for dependency in ${EASY4J_DEPENDENCIES}; do
-            git clone --depth 1 --branch "${EASY4J_BRANCH}" \
-              "https://github.com/easy-4-java/${dependency}.git" \
-              "${dependency_root}/${dependency}"
-            for attempt in 1 2 3; do
-              if mvn -B --no-transfer-progress \
-                -f "${dependency_root}/${dependency}/pom.xml" \
-                -Dmaven.test.skip=true -Djacoco.skip=true -Dgpg.skip=true install; then
-                break
-              fi
-              if [[ "${attempt}" -eq 3 ]]; then
-                exit 1
-              fi
-              sleep "$((attempt * 10))"
-            done
-          done
+          # Fixed public revisions: changing a sibling main must not silently
+          # change the snapshot classes tested by this repository.
+          while read -r dependency revision; do
+            git init "${dependency_root}/${dependency}"
+            git -C "${dependency_root}/${dependency}" remote add origin "https://github.com/easy-4-java/${dependency}.git"
+            git -C "${dependency_root}/${dependency}" fetch --depth 1 origin "${revision}"
+            git -C "${dependency_root}/${dependency}" checkout --detach FETCH_HEAD
+            test "$(git -C "${dependency_root}/${dependency}" rev-parse HEAD)" = "${revision}"
+            mvn -B --no-transfer-progress -s .mvn/ci-settings.xml -f "${dependency_root}/${dependency}/pom.xml" -Dgpg.skip=true clean install
+          done <<'SOURCES'
+          jwt-issuer fe29ffd8471eff70d2117b73e4cb2459e5ec4a2f
+          spring-security-extension 385e4ae3b16f369c94a9068afcb27fca47494767
+          SOURCES
 
       - name: Build and verify with JaCoCo coverage gate
-        run: mvn -B --no-transfer-progress clean verify
+        id: project_verify
+        run: python3 .github/scripts/run_verify.py
 
       - name: Upload JaCoCo coverage report
-        if: always()
+        if: ${{ always() && steps.project_verify.outputs.jacoco == 'true' }}
         uses: actions/upload-artifact@v7
         with:
           name: jacoco-coverage
           path: target/site/jacoco
+          if-no-files-found: error
           retention-days: 14
 
       - name: Upload surefire reports
-        if: always()
+        if: ${{ always() && steps.project_verify.outputs.surefire == 'true' }}
         uses: actions/upload-artifact@v7
         with:
           name: surefire-reports
           path: target/surefire-reports
+          if-no-files-found: error
           retention-days: 14
