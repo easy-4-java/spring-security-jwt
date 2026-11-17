@@ -45,15 +45,15 @@
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <!-- Dependency versions -->
             <commons-lang3.version>3.20.0</commons-lang3.version>
-            <easy4j-spring-security-extension.version>2.0.x.20260630-SNAPSHOT</easy4j-spring-security-extension.version>
-            <jackson.version>2.17.2</jackson.version>
+            <easy4j-spring-security-extension.version>1.0.x.20260630-SNAPSHOT</easy4j-spring-security-extension.version>
+            <jackson.version>2.18.12</jackson.version>
             <javax-servlet-api.version>4.0.1</javax-servlet-api.version>
             <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <mockito.version>5.18.0</mockito.version>
             <lombok.version>1.18.46</lombok.version>
             <slf4j.version>2.0.18</slf4j.version>
             <spring-framework.version>5.3.39</spring-framework.version>
-            <spring-security.version>5.6.0</spring-security.version>
+            <spring-security.version>5.8.14</spring-security.version>
             <!-- Maven Plugin versions -->
             <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
             <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
@@ -66,6 +66,21 @@
     <!-- 依赖版本统一管理（dependencyManagement） -->
     <dependencyManagement>
         <dependencies>
+            <!-- Keep transitive modules on the same javax.servlet-compatible generation. -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>${spring-security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- For Lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -98,11 +113,13 @@
                 <version>${spring-framework.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- For Jackson -->
+            <!-- Align all Jackson 2.x components, including transitive JWT codecs. -->
             <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <!-- For Commons Lang3 -->
             <dependency>
@@ -222,6 +239,14 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version>
+                <configuration>
+                    <failIfNoTests>true</failIfNoTests>
+                </configuration>
+            </plugin>
 
             <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
             <plugin>
