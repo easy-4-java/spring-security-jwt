@@ -57,7 +57,7 @@ jobs:
             test "$(git -C "${dependency_root}/${dependency}" rev-parse HEAD)" = "${revision}"
             mvn -B --no-transfer-progress -s .mvn/ci-settings.xml -f "${dependency_root}/${dependency}/pom.xml" -Dgpg.skip=true clean install
           done <<'SOURCES'
-          jwt-issuer fe29ffd8471eff70d2117b73e4cb2459e5ec4a2f
+          jwt-issuer a8aab19df8ca0a703bec0d27e245e8abc67e1956
           spring-security-extension 1c58ecfbbf02b5c61efbe66b7336e29f43bac4ce
           SOURCES
 
