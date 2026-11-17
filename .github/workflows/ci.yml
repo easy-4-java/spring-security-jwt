@@ -35,11 +35,11 @@ jobs:
       - name: Test report provenance helper
         run: python3 .github/scripts/test_run_verify.py
 
-      - name: Set up JDK 17
+      - name: Set up JDK 8 for pinned upstream sources
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '8'
           cache: maven
 
       - name: Build pinned public Easy4J snapshot sources
@@ -60,6 +60,12 @@ jobs:
           jwt-issuer a8aab19df8ca0a703bec0d27e245e8abc67e1956
           spring-security-extension 1c58ecfbbf02b5c61efbe66b7336e29f43bac4ce
           SOURCES
+
+      - name: Set up JDK 17 for this project
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
 
       - name: Build and verify with JaCoCo coverage gate
         id: project_verify
