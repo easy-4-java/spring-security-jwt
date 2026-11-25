@@ -1,5 +1,0 @@
-org/springframework/security/boot/jwt/authentication/server/JwtAuthenticationWebFilter.class
-org/springframework/security/boot/jwt/authentication/JwtAuthenticationToken.class
-org/springframework/security/boot/jwt/authentication/JwtAuthorizationSuccessHandler.class
-org/springframework/security/boot/jwt/authentication/JwtAuthorizationToken.class
-org/springframework/security/boot/jwt/endpoint/RefreshTokenEndpoint.class
